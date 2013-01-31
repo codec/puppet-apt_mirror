@@ -1,8 +1,8 @@
-# mirror <%= name %>
-deb http://<%= mirror -%>/<%= os -%> <%= release -%> <%= components.join(' ') -%>
+# mirror <%= name -%>
+<% arch.each do |it| %>
+deb<%= "-#{it}" if it != architecture %> http://<%= mirror -%>/<%= os -%> <%= release -%> <%= components.join(' ') -%>
+<% end -%>
 
 <% if source -%>
 deb http://<%= mirror -%>/<%= os -%> <%= release -%> <%= components.join(' ') -%>
 <% end -%>
-
-

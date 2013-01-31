@@ -5,6 +5,7 @@ define apt_mirror::mirror (
   $release    = ['precise'],
   $components = ['main', 'contrib', 'non-free'],
   $source     = false,
+  $arch       = [$::architecture]
 ) {
 
   concat::fragment { $name:
