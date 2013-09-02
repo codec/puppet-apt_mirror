@@ -13,6 +13,10 @@ class apt_mirror (
     ensure => $ensure,
   }
 
+  file { $base_path:
+    ensure => $enabled ? { false => absent, default => directory },
+  }
+
   concat { '/etc/apt/mirror.list':
     owner => 'root',
     group => 'root',
@@ -31,6 +35,7 @@ class apt_mirror (
     command => '/usr/bin/apt-mirror /etc/apt/mirror.list',
     minute  => 0,
     hour    => 4,
+    require => File[$base_path],
   }
 
 }
