@@ -14,7 +14,9 @@ class apt_mirror (
   }
 
   file { $base_path:
-    ensure => $enabled ? { false => absent, default => directory },
+    ensure  => $enabled ? { false => absent, default => directory },
+    owner   => 'apt-mirror',
+    require => Package['apt-mirror'],
   }
 
   concat { '/etc/apt/mirror.list':
